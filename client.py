@@ -23,12 +23,24 @@ async def getchats():
         response = await websocket.recv()
         print(response.replace("%20", " "))
 
+from tkinter import *
+
 def user_input_thread(IN):
     global user_input
-    while True:
-        user_input = input("leerer Input aktualisiert Seite, type %q to quit chat : ")
+
+    def submit():
+        global user_input
+        user_input = entry.get()
         os.system('cls' if os.name == 'nt' else 'clear')  # clear console
+        entry.delete(0, 'end')  # clear the entry field
         asyncio.run(getchat(IN))
+
+    root = Tk()
+    Label(root, text="leerer Input aktualisiert Seite, type %q to quit chat : ").pack()
+    entry = Entry(root)
+    entry.pack()
+    Button(root, text="Submit", command=submit).pack()
+    root.mainloop()
 
 def main():
     global user_input
@@ -43,7 +55,7 @@ def main():
         while True:
             if user_input == "":
                 asyncio.run(getchat(IN))
-                time.sleep(2)  
+                time.sleep(2)  # pause for 2 seconds
             elif user_input=="%q":
                 break
             else:
