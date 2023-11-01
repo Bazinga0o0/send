@@ -1,0 +1,11 @@
+Konzept:
+serverseitig sql abfrage
+kommunikation über websockets
+aufbau von anfragen:
+jede Anfrage beginnt mit passwort und dann email: 123 33leon3@gmx.de
+    createuser (name) (email)
+    createchat (name) (user_id)
+    pwd email sendmessage (message) (chat_id)
+bei verbindungsaufbau sendet server nachricht an client:
+    requestuser
+->  user sendet user_id und passwort für zugriff, sonst wird verbindung geschlossen
